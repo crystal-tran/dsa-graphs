@@ -3,9 +3,18 @@ import { GNodeStr } from "../graph/graph";
 /** Return array of nodes, in DFS order (recursive version)  */
 
 function rDfs(
-    start: GNodeStr,
-    result: string[] = [],
-    visited = new Set([start])): string[] {
+  start: GNodeStr,
+  result: string[] = [],
+  visited = new Set([start])): string[] {
+
+  result.push(start.value);
+
+  start.adjacent.forEach((child) => {
+    if (!visited.has(child)) {
+      visited.add(child);
+      result.push(...rDfs(child, [], visited));
+    }
+  })
 
       //add start.val to result
       //access start.adjacent and use forEach,
@@ -14,7 +23,7 @@ function rDfs(
       // result.push(...rdfs(child))
       //
       //return
-  return ["todo"];
+  return result;
 }
 
 /** Return array of nodes, in DFS order (iterative version)  */
