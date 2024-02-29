@@ -1,7 +1,5 @@
 /** Graph Node class. */
 
-import { getAllJSDocTags } from "typescript";
-
 class GNodeStr {
   value: string;
   adjacent: Set<GNodeStr>;
