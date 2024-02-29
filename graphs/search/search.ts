@@ -12,7 +12,8 @@ function rDfs(
   start.adjacent.forEach((child) => {
     if (!visited.has(child)) {
       visited.add(child);
-      result.push(...rDfs(child, [], visited));
+      rDfs(child, result, visited);
+      // result.push(...rDfs(child, [], visited));
     }
   })
 
@@ -29,7 +30,7 @@ function rDfs(
 /** Return array of nodes, in DFS order (iterative version)  */
 
 function iDfs(start: GNodeStr): string[] {
-  const toVisit = [start];
+  const toVisit = [start]; //TODO: use stack
   const visited: Set<GNodeStr> = new Set([]);
   let result: string[] = [];
 
@@ -52,7 +53,7 @@ function iDfs(start: GNodeStr): string[] {
 function bfs(start: GNodeStr): string[] {
   const toVisit = new Queue<GNodeStr>([start]);
   const visited: Set<GNodeStr> = new Set([]);
-  let result: string[] = [];
+  let result: string[] = []; //TODO: Move to where we use it, or append as we go (and drop line 68)
 
   while (!toVisit.isEmpty()){
     const dNode = toVisit.dequeue()!;

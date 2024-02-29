@@ -26,7 +26,7 @@ class GraphStr {
 
   /** Add array of nodes to graph. */
   addNodes(nodeArray: GNodeStr[]): void {
-    nodeArray.map(n => this.nodes.add(n));
+    nodeArray.map(n => this.nodes.add(n)); //TODO: just do this as for loop/forEach (& also line 40)
   }
 
   /** Add edge between v1 and v2. */
