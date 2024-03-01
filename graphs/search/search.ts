@@ -1,8 +1,8 @@
 import { GNodeStr } from "../graph/graph";
 import { Queue } from "../common/queue";
+import { Stack } from "../common/stack";
 
 /** Return array of nodes, in DFS order (recursive version)  */
-//TODO: ask question about test for rDFs
 function rDfs(
   start: GNodeStr,
   result: string[] = [],
@@ -30,13 +30,16 @@ function rDfs(
 /** Return array of nodes, in DFS order (iterative version)  */
 
 function iDfs(start: GNodeStr): string[] {
-  const toVisit = [start]; //TODO: use stack
+  const toVisit = new Stack([start]);
   const visited: Set<GNodeStr> = new Set([]);
   let result: string[] = [];
 
-  while (toVisit.length > 0) {
+  while (!toVisit.isEmpty()) {
     const poppedNode = toVisit.pop()!;
-    visited.add(poppedNode);
+    if(!visited.has(poppedNode)){
+      visited.add(poppedNode);
+      result.push(poppedNode.value)
+    }
 
     poppedNode.adjacent.forEach(c => {
       if (!visited.has(c)) {
@@ -44,20 +47,22 @@ function iDfs(start: GNodeStr): string[] {
       }
     });
   }
-  visited.forEach(n => result.push(n.value));
   return result;
 }
 
 /** Return array of nodes, in BFS order (not recursive version)  */
 
 function bfs(start: GNodeStr): string[] {
-  const toVisit = new Queue<GNodeStr>([start]);
+  const toVisit = new Queue([start]);
   const visited: Set<GNodeStr> = new Set([]);
-  let result: string[] = []; //TODO: Move to where we use it, or append as we go (and drop line 68)
+  let result: string[] = [];
 
   while (!toVisit.isEmpty()){
     const dNode = toVisit.dequeue()!;
-    visited.add(dNode);
+    if(!visited.has(dNode)){
+      visited.add(dNode);
+      result.push(dNode.value);
+    }
 
     dNode.adjacent.forEach(c => {
       if(!visited.has(c)){
@@ -65,7 +70,7 @@ function bfs(start: GNodeStr): string[] {
       }
     });
   }
-  visited.forEach(n => result.push(n.value));
+
   return result;
 }
 

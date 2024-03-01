@@ -26,7 +26,9 @@ class GraphStr {
 
   /** Add array of nodes to graph. */
   addNodes(nodeArray: GNodeStr[]): void {
-    nodeArray.map(n => this.nodes.add(n)); //TODO: just do this as for loop/forEach (& also line 40)
+    for(let node of nodeArray){
+      this.nodes.add(node);
+    }
   }
 
   /** Add edge between v1 and v2. */
@@ -37,7 +39,9 @@ class GraphStr {
 
   /** Add edges between node pair arrays to graph */
   addEdges(nodeArray: [GNodeStr, GNodeStr][]){
-    nodeArray.map(n => this.addEdge(n[0], n[1]));
+    for(let nodes of nodeArray){
+      this.addEdge(nodes[0], nodes[1])
+    }
   }
 
 
